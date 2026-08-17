@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Quiz Result</title>
+
+</head>
+
+<body>
+
+    <h1>Quiz Result</h1>
+
+    <hr>
+
+    <div>
+
+        <h2>Score</h2>
+
+        <p>
+            Score:
+            <span id="score">0</span>
+            /
+            <span id="totalQuestions">0</span>
+        </p>
+
+        <p>
+            Percentage:
+            <span id="percentage">0</span>%
+        </p>
+
+        <p>
+            Status:
+            <span id="status">-</span>
+        </p>
+
+    </div>
+
+    <br>
+
+    <button id="reviewBtn">
+        Review Answers
+    </button>
+    <br><br>
+
+    <button
+        onclick="window.location.href='attempt-history.html'">
+        Attempt History
+    </button>
+
+    <br><br>
+
+    <button onclick="window.location.href='student-quizzes.html'">
+        Back to Quizzes
+    </button>
+
+    <p id="message"></p>
+
+
+    <script src="js/result.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Leaderboard</title>
+
+</head>
+
+<body>
+
+    <h1>Leaderboard</h1>
+
+    <nav>
+        <a href="student-dashboard.html">Dashboard</a>
+        <a href="student-quizzes.html">Quizzes</a>
+        <a href="attempt-history.html">Attempt History</a>
+        <a href="leaderboard.html">Leaderboard</a>
+    </nav>
+
+    <hr>
+
+
+    <!-- ==========================================
+         OVERALL LEADERBOARD
+    =========================================== -->
+
+    <h2>Overall Leaderboard</h2>
+
+    <div id="message"></div>
+
+    <table border="1">
+
+        <thead>
+
+            <tr>
+                <th>Rank</th>
+                <th>Student</th>
+                <th>Attempts</th>
+                <th>Average Score</th>
+                <th>Best Score</th>
+            </tr>
+
+        </thead>
+
+        <tbody id="leaderboardBody">
+
+        </tbody>
+
+    </table>
+
+
+    <br>
+    <hr>
+    <br>
+
+
+    <!-- ==========================================
+         CATEGORY LEADERBOARD
+    =========================================== -->
+
+    <h2>Category Leaderboard</h2>
+
+    <label for="categorySelect">
+        Select Category:
+    </label>
+
+    <select id="categorySelect">
+
+        <option value="">
+            Select Category
+        </option>
+
+    </select>
+
+    <button id="loadCategoryBtn">
+        Load Category Leaderboard
+    </button>
+
+    <p id="categoryMessage"></p>
+
+
+    <table border="1">
+
+        <thead>
+
+            <tr>
+                <th>Rank</th>
+                <th>Student</th>
+                <th>Attempts</th>
+                <th>Average Score</th>
+                <th>Best Score</th>
+            </tr>
+
+        </thead>
+
+        <tbody id="categoryLeaderboardBody">
+
+        </tbody>
+
+    </table>
+
+
+    <br>
+
+    <button id="backBtn">
+        Back to Dashboard
+    </button>
+
+
+    <script src="js/leaderboard.js"></script>
+
+</body>
+
+</html>

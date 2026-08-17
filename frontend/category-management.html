@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Category Management</title>
+</head>
+
+<body>
+
+    <h1>Category Management</h1>
+
+
+    <!-- ========================================== -->
+    <!-- CREATE CATEGORY -->
+    <!-- ========================================== -->
+
+    <h2>Create Category</h2>
+
+    <form id="categoryForm">
+
+        <input
+            type="text"
+            id="categoryName"
+            placeholder="Category name"
+            required
+        >
+
+        <br><br>
+
+        <textarea
+            id="categoryDescription"
+            placeholder="Category description"
+        ></textarea>
+
+        <br><br>
+
+        <button type="submit">
+            Create Category
+        </button>
+
+    </form>
+
+    <p id="message"></p>
+
+
+    <!-- ========================================== -->
+    <!-- CATEGORY LIST -->
+    <!-- ========================================== -->
+
+    <h2>All Categories</h2>
+
+    <table border="1">
+
+        <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+
+        </thead>
+
+        <tbody id="categoryTableBody">
+        </tbody>
+
+    </table>
+
+
+    <!-- ========================================== -->
+    <!-- EDIT CATEGORY -->
+    <!-- ========================================== -->
+
+    <div
+        id="editSection"
+        style="display: none;"
+    >
+
+        <h2>Edit Category</h2>
+
+        <form id="editCategoryForm">
+
+            <input
+                type="hidden"
+                id="editCategoryId"
+            >
+
+            <input
+                type="text"
+                id="editCategoryName"
+                placeholder="Category name"
+                required
+            >
+
+            <br><br>
+
+            <textarea
+                id="editCategoryDescription"
+                placeholder="Category description"
+            ></textarea>
+
+            <br><br>
+
+            <button type="submit">
+                Update Category
+            </button>
+
+            <button
+                type="button"
+                id="cancelEdit"
+            >
+                Cancel
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <script src="js/category-management.js"></script>
+
+</body>
+
+</html> 

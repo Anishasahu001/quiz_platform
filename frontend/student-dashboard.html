@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Student Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="css/student-dashboard.css"
+    >
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <h2>Quiz Student</h2>
+
+        <nav>
+
+            <a
+                href="student-dashboard.html"
+                class="active"
+            >
+                Dashboard
+            </a>
+
+            <a href="student-quizzes.html">
+                Quizzes
+            </a>
+
+            <a href="attempt-history.html">
+                Attempt History
+            </a>
+            <a href="leaderboard.html">
+                Leaderboard
+            </a>
+
+        </nav>
+
+        <button id="logoutBtn">
+            Logout
+        </button>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    Student Dashboard
+                </h1>
+
+                <p>
+                    Welcome back, Student
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <!-- MESSAGE -->
+
+        <p id="message"></p>
+
+
+        <!-- STATISTICS -->
+
+        <section class="statistics">
+
+            <div class="stat-card">
+
+                <h3>
+                    Total Attempts
+                </h3>
+
+                <p id="totalAttempts">
+                    0
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>
+                    Quizzes Completed
+                </h3>
+
+                <p id="completedQuizzes">
+                    0
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>
+                    Average Score
+                </h3>
+
+                <p id="averageScore">
+                    0%
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>
+                    Best Score
+                </h3>
+
+                <p id="bestScore">
+                    0%
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- QUIZ HISTORY -->
+
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Recent Quiz History
+                    </h2>
+
+                    <p>
+                        Your recent quiz attempts
+                    </p>
+
+                </div>
+
+                <button
+                    onclick="window.location.href='attempt-history.html'"
+                >
+                    View All
+                </button>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Quiz
+                            </th>
+
+                            <th>
+                                Score
+                            </th>
+
+                            <th>
+                                Percentage
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="historyTableBody">
+
+                        <tr>
+
+                            <td colspan="4">
+                                Loading...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- PERFORMANCE CHART -->
+
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Performance
+                    </h2>
+
+                    <p>
+                        Your quiz performance
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="chart-container">
+
+                <canvas
+                    id="performanceChart"
+                ></canvas>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- CHART.JS -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js"
+    ></script>
+
+
+    <!-- DASHBOARD JS -->
+
+    <script
+        src="js/student-dashboard.js"
+    ></script>
+
+</body>
+
+</html>

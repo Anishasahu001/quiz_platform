@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Question Management</title>
+</head>
+
+<body>
+
+    <h1>Question Management</h1>
+
+
+    <!-- ========================================== -->
+    <!-- ADD QUESTION -->
+    <!-- ========================================== -->
+
+    <h2>Add Question</h2>
+
+    <form id="questionForm">
+
+        <label>Quiz ID</label>
+        <br>
+
+        <input
+            type="number"
+            id="quizId"
+            required
+        >
+
+        <br><br>
+
+
+        <label>Category ID</label>
+        <br>
+
+        <input
+            type="number"
+            id="categoryId"
+        >
+
+        <br><br>
+
+
+        <label>Question</label>
+        <br>
+
+        <textarea
+            id="questionText"
+            required
+        ></textarea>
+
+        <br><br>
+
+
+        <label>Option 1</label>
+        <br>
+
+        <input
+            type="text"
+            id="option1"
+            required
+        >
+
+        <br><br>
+
+
+        <label>Option 2</label>
+        <br>
+
+        <input
+            type="text"
+            id="option2"
+            required
+        >
+
+        <br><br>
+
+
+        <label>Option 3</label>
+        <br>
+
+        <input
+            type="text"
+            id="option3"
+            required
+        >
+
+        <br><br>
+
+
+        <label>Option 4</label>
+        <br>
+
+        <input
+            type="text"
+            id="option4"
+            required
+        >
+
+        <br><br>
+
+
+        <label>Correct Answer</label>
+        <br>
+
+        <select id="correctAnswer">
+
+            <option value="0">
+                Option 1
+            </option>
+
+            <option value="1">
+                Option 2
+            </option>
+
+            <option value="2">
+                Option 3
+            </option>
+
+            <option value="3">
+                Option 4
+            </option>
+
+        </select>
+
+        <br><br>
+
+
+        <button type="submit">
+            Add Question
+        </button>
+
+    </form>
+
+
+    <p id="message"></p>
+
+
+    <!-- ========================================== -->
+    <!-- EDIT QUESTION -->
+    <!-- ========================================== -->
+
+    <div
+        id="editSection"
+        style="display: none;"
+    >
+
+        <h2>Edit Question</h2>
+
+        <form id="editQuestionForm">
+
+            <input
+                type="hidden"
+                id="editId"
+            >
+
+
+            <label>Quiz ID</label>
+            <br>
+
+            <input
+                type="number"
+                id="editQuizId"
+                required
+            >
+
+            <br><br>
+
+
+            <label>Category ID</label>
+            <br>
+
+            <input
+                type="number"
+                id="editCategoryId"
+            >
+
+            <br><br>
+
+
+            <label>Question</label>
+            <br>
+
+            <textarea
+                id="editQuestionText"
+                required
+            ></textarea>
+
+            <br><br>
+
+
+            <label>Option 1</label>
+            <br>
+
+            <input
+                type="text"
+                id="editOption1"
+                required
+            >
+
+            <br><br>
+
+
+            <label>Option 2</label>
+            <br>
+
+            <input
+                type="text"
+                id="editOption2"
+                required
+            >
+
+            <br><br>
+
+
+            <label>Option 3</label>
+            <br>
+
+            <input
+                type="text"
+                id="editOption3"
+                required
+            >
+
+            <br><br>
+
+
+            <label>Option 4</label>
+            <br>
+
+            <input
+                type="text"
+                id="editOption4"
+                required
+            >
+
+            <br><br>
+
+
+            <label>Correct Answer</label>
+            <br>
+
+            <select id="editCorrectAnswer">
+
+                <option value="0">
+                    Option 1
+                </option>
+
+                <option value="1">
+                    Option 2
+                </option>
+
+                <option value="2">
+                    Option 3
+                </option>
+
+                <option value="3">
+                    Option 4
+                </option>
+
+            </select>
+
+            <br><br>
+
+
+            <button type="submit">
+                Update Question
+            </button>
+
+
+            <button
+                type="button"
+                id="cancelEdit"
+            >
+                Cancel
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- QUESTIONS -->
+    <!-- ========================================== -->
+
+    <h2>All Questions</h2>
+
+    <table border="1">
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Quiz ID</th>
+
+                <th>Question</th>
+
+                <th>Options</th>
+
+                <th>Correct Answer</th>
+
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="questionTableBody"></tbody>
+
+    </table>
+
+
+    <script src="js/question-management.js"></script>
+
+</body>
+
+</html>

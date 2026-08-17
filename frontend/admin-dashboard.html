@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="css/admin-dashboard.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         SIDEBAR
+    =========================================== -->
+
+    <aside class="sidebar">
+
+        <h2>Quiz Admin</h2>
+
+        <nav>
+
+            <a
+                href="#"
+                class="active"
+            >
+                Dashboard
+            </a>
+
+            <a href="#users">
+                Users
+            </a>
+
+            <a href="quiz-management.html">
+                Quizzes
+            </a>
+
+            <a href="question-management.html">
+                Question Management
+            </a>
+
+            <a href="admin-results.html">
+                Results
+            </a>
+
+        </nav>
+
+        <button id="logoutBtn">
+            Logout
+        </button>
+
+    </aside>
+
+
+
+    <!-- ==========================================
+         MAIN CONTENT
+    =========================================== -->
+
+    <main class="main-content">
+
+
+        <!-- ==========================================
+             HEADER
+        =========================================== -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    Admin Dashboard
+                </h1>
+
+                <p>
+                    Welcome back, Admin
+                </p>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ==========================================
+             BASIC STATISTICS
+        =========================================== -->
+
+        <section class="statistics">
+
+            <div class="stat-card">
+
+                <h3>
+                    Total Users
+                </h3>
+
+                <p id="totalUsers">
+                    0
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>
+                    Total Students
+                </h3>
+
+                <p id="totalStudents">
+                    0
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>
+                    Total Admins
+                </h3>
+
+                <p id="totalAdmins">
+                    0
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>
+                    Total Quizzes
+                </h3>
+
+                <p id="totalQuizzes">
+                    0
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==========================================
+             ADMIN ANALYTICS
+        =========================================== -->
+
+        <section class="analytics-section">
+
+            <h2>
+                Admin Analytics
+            </h2>
+
+            <p>
+                Overall quiz platform statistics
+            </p>
+
+
+            <div class="statistics">
+
+
+                <!-- TOTAL STUDENTS -->
+
+                <div class="stat-card">
+
+                    <h3>
+                        Analytics Students
+                    </h3>
+
+                    <p id="analyticsStudents">
+                        0
+                    </p>
+
+                </div>
+
+
+                <!-- TOTAL QUIZZES -->
+
+                <div class="stat-card">
+
+                    <h3>
+                        Analytics Quizzes
+                    </h3>
+
+                    <p id="analyticsQuizzes">
+                        0
+                    </p>
+
+                </div>
+
+
+                <!-- TOTAL ATTEMPTS -->
+
+                <div class="stat-card">
+
+                    <h3>
+                        Total Attempts
+                    </h3>
+
+                    <p id="analyticsAttempts">
+                        0
+                    </p>
+
+                </div>
+
+
+                <!-- AVERAGE SCORE -->
+
+                <div class="stat-card">
+
+                    <h3>
+                        Average Score
+                    </h3>
+
+                    <p id="analyticsAverage">
+                        0%
+                    </p>
+
+                </div>
+
+
+                <!-- HIGHEST SCORE -->
+
+                <div class="stat-card">
+
+                    <h3>
+                        Highest Score
+                    </h3>
+
+                    <p id="analyticsHighest">
+                        0%
+                    </p>
+
+                </div>
+
+
+                <!-- LOWEST SCORE -->
+
+                <div class="stat-card">
+
+                    <h3>
+                        Lowest Score
+                    </h3>
+
+                    <p id="analyticsLowest">
+                        0%
+                    </p>
+
+                </div>
+
+
+                <!-- PASSED -->
+
+                <div class="stat-card">
+
+                    <h3>
+                        Passed
+                    </h3>
+
+                    <p id="analyticsPassed">
+                        0
+                    </p>
+
+                </div>
+
+
+                <!-- FAILED -->
+
+                <div class="stat-card">
+
+                    <h3>
+                        Failed
+                    </h3>
+
+                    <p id="analyticsFailed">
+                        0
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==========================================
+             PASS / FAIL ANALYTICS
+        =========================================== -->
+
+        <section class="analytics-section">
+
+            <h2>
+                Pass / Fail Analytics
+            </h2>
+
+            <div
+                id="passFailContainer"
+                style="
+                    margin-top:20px;
+                    padding:20px;
+                    border:1px solid #ddd;
+                    border-radius:10px;
+                "
+            >
+
+                <p>
+                    Passed:
+                    <strong id="passCount">
+                        0
+                    </strong>
+                </p>
+
+
+                <p>
+                    Failed:
+                    <strong id="failCount">
+                        0
+                    </strong>
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==========================================
+             USER MANAGEMENT
+        =========================================== -->
+
+        <section
+            id="users"
+            class="user-section"
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        User Management
+                    </h2>
+
+                    <p>
+                        Manage registered users
+                    </p>
+
+                </div>
+
+
+                <button id="refreshUsers">
+                    Refresh
+                </button>
+
+            </div>
+
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                ID
+                            </th>
+
+                            <th>
+                                Name
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Role
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="usersTableBody">
+
+                        <!-- Users will appear here -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ==========================================
+         JAVASCRIPT
+    =========================================== -->
+
+    <script src="js/admin-dashboard.js"></script>
+
+</body>
+
+</html>
