@@ -4,7 +4,28 @@ const express = require("express");
 const cors = require("cors");
 
 const pool = require("./config/db");
+// ==========================================
+// CREATE USERS TABLE
+// ==========================================
 
+async function createUsersTable() {
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS users (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(100) NOT NULL,
+        email VARCHAR(150) UNIQUE NOT NULL,
+        password TEXT NOT NULL,
+        role VARCHAR(20) DEFAULT 'student',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+
+    console.log("Users table ready");
+  } catch (error) {
+    console.error("Error creating users table:", error);
+  }
+}
 const authRoutes = require("./routes/authRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const quizRoutes = require("./routes/quizRoutes");
@@ -95,9 +116,10 @@ app.use("/api/student", studentRoutes);
 // ==========================================
 
 const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(
-    `Backend server running on http://localhost:${PORT}`
-  );
+createUsersTable().then(() => {
+  app.listen(PORT, () => {
+    console.log(
+      `Backend server running on http://localhost:${PORT}`
+    );
+  });
 });
