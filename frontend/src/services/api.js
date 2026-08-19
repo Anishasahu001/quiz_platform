@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://quiz_platform_backend.onrender.com/api"
+  baseURL:"https://quiz-platform-backend-h8av.onrender.com/api"
 });
 
 export default api;
