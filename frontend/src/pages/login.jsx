@@ -50,6 +50,7 @@ function Login() {
       const role = String(user.role || "")
         .trim()
         .toLowerCase();
+      alert("ROLE FROM SERVER = " + role);
 
       console.log("USER:", user);
       console.log("USER ROLE:", user.role);
