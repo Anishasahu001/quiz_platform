@@ -33,62 +33,73 @@ function Login() {
     setMessage("");
 
     try {
-      const response = await api.post(
-        "/auth/login",
-        form
-      );
+      const response = await api.post("/auth/login", form);
+
+      console.log("LOGIN RESPONSE:", response.data);
 
       const user = response.data.user;
       const token = response.data.token;
 
-      console.log("LOGIN RESPONSE:", response.data);
-      console.log("USER ROLE:", user?.role);
+      // Check login response
+      if (!token || !user) {
+        setMessage("Invalid login response from server.");
+        return;
+      }
+
+      // Get role safely
+      const role = String(user.role || "")
+        .trim()
+        .toLowerCase();
+
+      console.log("USER:", user);
+      console.log("USER ROLE:", user.role);
+      console.log("FINAL ROLE:", role);
 
       // ==========================================
       // SAVE LOGIN INFORMATION
       // ==========================================
 
       localStorage.setItem("token", token);
-
-      localStorage.setItem(
-        "user",
-        JSON.stringify(user)
-      );
+      localStorage.setItem("user", JSON.stringify(user));
 
       setMessage("Login successful!");
 
       // ==========================================
-      // REDIRECT BASED ON ROLE
+      // ADMIN
       // ==========================================
 
-      setTimeout(() => {
-        const role = user?.role?.toLowerCase();
+      if (role === "admin") {
+        console.log("REDIRECTING TO ADMIN DASHBOARD");
 
-        // ADMIN
-        if (role === "admin") {
-          window.location.href =
-            "/admin-dashboard.html";
-        }
+        window.location.href = "/admin-dashboard.html";
 
-        // STUDENT
-        else if (role === "student") {
-          window.location.href =
-            "/student-quizzes.html";
-        }
+        return;
+      }
 
-        // UNKNOWN ROLE
-        else {
-          setMessage(
-            "Unknown user role. Please contact administrator."
-          );
-        }
-      }, 500);
+      // ==========================================
+      // STUDENT
+      // ==========================================
+
+      if (role === "student") {
+        console.log("REDIRECTING TO STUDENT DASHBOARD");
+
+        window.location.href = "/student-quizzes.html";
+
+        return;
+      }
+
+      // ==========================================
+      // UNKNOWN ROLE
+      // ==========================================
+
+      console.error("UNKNOWN ROLE:", role);
+
+      setMessage(
+        `Unknown user role: ${role || "empty"}. Please contact administrator.`
+      );
 
     } catch (error) {
-      console.error(
-        "Login error:",
-        error
-      );
+      console.error("Login error:", error);
 
       setMessage(
         error.response?.data?.message ||
@@ -128,7 +139,6 @@ function Login() {
           {/* EMAIL */}
 
           <div>
-
             <label className="mb-1 block font-medium">
               Email
             </label>
@@ -142,13 +152,11 @@ function Login() {
               placeholder="Enter your email"
               required
             />
-
           </div>
 
           {/* PASSWORD */}
 
           <div>
-
             <label className="mb-1 block font-medium">
               Password
             </label>
@@ -162,7 +170,6 @@ function Login() {
               placeholder="Enter password"
               required
             />
-
           </div>
 
           {/* LOGIN BUTTON */}
@@ -179,7 +186,6 @@ function Login() {
         {/* REGISTER */}
 
         <p className="mt-5 text-center">
-
           Don't have an account?
 
           <button
@@ -189,7 +195,6 @@ function Login() {
           >
             Register
           </button>
-
         </p>
 
       </div>
