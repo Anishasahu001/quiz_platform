@@ -34,7 +34,7 @@ router.post(
 router.get(
     "/",
     authenticateToken,
-    authorizeRoles("admin", "STUDENT"),
+    authorizeRoles("admin", "student"),
     getCategories
 );
 
