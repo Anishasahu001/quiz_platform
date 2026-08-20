@@ -28,11 +28,7 @@ router.post(
             const studentId = req.user.id;
             const answers = req.body.answers || {};
 
-
-            // ==========================================
             // GET QUESTIONS
-            // ==========================================
-
             const result = await client.query(
                 `SELECT
                     id,
@@ -46,60 +42,34 @@ router.post(
 
             const questions = result.rows;
 
-
             if (questions.length === 0) {
-
                 return res.status(404).json({
                     success: false,
                     message: "No questions found for this quiz"
                 });
-
             }
 
-
-            // ==========================================
             // CALCULATE SCORE
-            // ==========================================
-
             let score = 0;
 
             questions.forEach((question) => {
 
-                const studentAnswer =
-                    answers[question.id];
+                const studentAnswer = answers[question.id];
 
                 if (
                     studentAnswer !== undefined &&
                     String(studentAnswer).toLowerCase() ===
                     String(question.correct_answer).toLowerCase()
                 ) {
-
                     score++;
-
                 }
 
             });
 
-
-            // ==========================================
-            // TOTAL QUESTIONS
-            // ==========================================
-
-            const totalQuestions =
-                questions.length;
-
-
-            // ==========================================
-            // PERCENTAGE
-            // ==========================================
+            const totalQuestions = questions.length;
 
             const percentage =
                 (score / totalQuestions) * 100;
-
-
-            // ==========================================
-            // PASS / FAIL
-            // ==========================================
 
             const status =
                 percentage >= 50
@@ -107,17 +77,11 @@ router.post(
                     : "FAIL";
 
 
-            // ==========================================
             // START TRANSACTION
-            // ==========================================
-
             await client.query("BEGIN");
 
 
-            // ==========================================
             // SAVE ATTEMPT
-            // ==========================================
-
             const attemptResult = await client.query(
                 `INSERT INTO quiz_attempts
                 (
@@ -140,15 +104,11 @@ router.post(
                 ]
             );
 
-
             const attemptId =
                 attemptResult.rows[0].id;
 
 
-            // ==========================================
-            // SAVE EACH ANSWER
-            // ==========================================
-
+            // SAVE ANSWERS
             for (const question of questions) {
 
                 const selectedAnswer =
@@ -158,7 +118,6 @@ router.post(
                     selectedAnswer !== null &&
                     String(selectedAnswer).toLowerCase() ===
                     String(question.correct_answer).toLowerCase();
-
 
                 await client.query(
                     `INSERT INTO quiz_answers
@@ -182,41 +141,20 @@ router.post(
             }
 
 
-            // ==========================================
             // COMMIT
-            // ==========================================
-
             await client.query("COMMIT");
 
 
-            // ==========================================
-            // SEND RESPONSE
-            // ==========================================
-
+            // RESPONSE
             res.json({
-
                 success: true,
-
-                message:
-                    "Quiz submitted successfully",
-
-                attemptId:
-                    attemptId,
-
-                score:
-                    score,
-
-                totalQuestions:
-                    totalQuestions,
-
-                percentage:
-                    percentage,
-
-                status:
-                    status
-
+                message: "Quiz submitted successfully",
+                attemptId,
+                score,
+                totalQuestions,
+                percentage,
+                status
             });
-
 
         } catch (error) {
 
@@ -228,12 +166,8 @@ router.post(
             );
 
             res.status(500).json({
-
                 success: false,
-
-                message:
-                    "Failed to submit quiz"
-
+                message: "Failed to submit quiz"
             });
 
         } finally {
@@ -258,12 +192,8 @@ router.get(
 
         try {
 
-            const attemptId =
-                req.params.attemptId;
-
-            const studentId =
-                req.user.id;
-
+            const attemptId = req.params.attemptId;
+            const studentId = req.user.id;
 
             const result = await pool.query(
                 `SELECT
@@ -282,30 +212,19 @@ router.get(
                 ]
             );
 
-
             if (result.rows.length === 0) {
 
                 return res.status(404).json({
-
                     success: false,
-
-                    message:
-                        "Quiz result not found"
-
+                    message: "Quiz result not found"
                 });
 
             }
 
-
             res.json({
-
                 success: true,
-
-                result:
-                    result.rows[0]
-
+                result: result.rows[0]
             });
-
 
         } catch (error) {
 
@@ -315,12 +234,8 @@ router.get(
             );
 
             res.status(500).json({
-
                 success: false,
-
-                message:
-                    "Failed to load result"
-
+                message: "Failed to load result"
             });
 
         }
@@ -360,16 +275,10 @@ router.get(
                  ORDER BY q.created_at DESC`
             );
 
-
             res.json({
-
                 success: true,
-
-                results:
-                    result.rows
-
+                results: result.rows
             });
-
 
         } catch (error) {
 
@@ -379,12 +288,8 @@ router.get(
             );
 
             res.status(500).json({
-
                 success: false,
-
-                message:
-                    "Failed to load results"
-
+                message: "Failed to load results"
             });
 
         }
@@ -405,12 +310,8 @@ router.get(
 
         try {
 
-            const attemptId =
-                req.params.attemptId;
-
-            const studentId =
-                req.user.id;
-
+            const attemptId = req.params.attemptId;
+            const studentId = req.user.id;
 
             const result = await pool.query(
                 `SELECT
@@ -438,16 +339,10 @@ router.get(
                 ]
             );
 
-
             res.json({
-
                 success: true,
-
-                answers:
-                    result.rows
-
+                answers: result.rows
             });
-
 
         } catch (error) {
 
@@ -457,12 +352,8 @@ router.get(
             );
 
             res.status(500).json({
-
                 success: false,
-
-                message:
-                    "Failed to load answer review"
-
+                message: "Failed to load answer review"
             });
 
         }
@@ -483,21 +374,7 @@ router.get(
 
         try {
 
-            const studentId =
-                req.user.id;
-
-
-            /*
-             * IMPORTANT:
-             * quiz_attempts does NOT have created_at.
-             *
-             * Therefore we DO NOT use:
-             *
-             * a.created_at
-             *
-             * We use a.id DESC to show the
-             * newest attempt first.
-             */
+            const studentId = req.user.id;
 
             const result = await pool.query(
                 `SELECT
@@ -517,16 +394,10 @@ router.get(
                 ]
             );
 
-
             res.json({
-
                 success: true,
-
-                attempts:
-                    result.rows
-
+                attempts: result.rows
             });
-
 
         } catch (error) {
 
@@ -536,18 +407,15 @@ router.get(
             );
 
             res.status(500).json({
-
                 success: false,
-
-                message:
-                    "Failed to load attempt history"
-
+                message: "Failed to load attempt history"
             });
 
         }
 
     }
 );
+
 
 // ==========================================
 // ADMIN - ANALYTICS
@@ -561,22 +429,16 @@ router.get(
 
         try {
 
-            // ==========================================
-            // STUDENT STATISTICS
-            // ==========================================
-
+            // STUDENTS
             const studentResult = await pool.query(`
                 SELECT
                     COUNT(*) AS total_students
                 FROM users
-                WHERE role = 'STUDENT'
+                WHERE LOWER(role) = 'student'
             `);
 
 
-            // ==========================================
-            // QUIZ STATISTICS
-            // ==========================================
-
+            // QUIZZES
             const quizResult = await pool.query(`
                 SELECT
                     COUNT(*) AS total_quizzes
@@ -584,10 +446,7 @@ router.get(
             `);
 
 
-            // ==========================================
-            // ATTEMPT STATISTICS
-            // ==========================================
-
+            // ATTEMPTS
             const attemptResult = await pool.query(`
                 SELECT
                     COUNT(*) AS total_attempts,
@@ -598,27 +457,20 @@ router.get(
             `);
 
 
-            // ==========================================
-            // PASS / FAIL STATISTICS
-            // ==========================================
-
+            // PASS / FAIL
             const passFailResult = await pool.query(`
                 SELECT
                     COUNT(*) FILTER (
-                        WHERE status = 'PASS'
+                        WHERE UPPER(status) = 'PASS'
                     ) AS passed,
 
                     COUNT(*) FILTER (
-                        WHERE status = 'FAIL'
+                        WHERE UPPER(status) = 'FAIL'
                     ) AS failed
 
                 FROM quiz_attempts
             `);
 
-
-            // ==========================================
-            // SEND ANALYTICS
-            // ==========================================
 
             res.json({
 
@@ -639,6 +491,7 @@ router.get(
                 },
 
                 attempts: {
+
                     total:
                         Number(
                             attemptResult.rows[0].total_attempts
@@ -658,6 +511,7 @@ router.get(
                         Number(
                             attemptResult.rows[0].lowest_score
                         )
+
                 },
 
                 passFail: {
@@ -676,7 +530,6 @@ router.get(
 
             });
 
-
         } catch (error) {
 
             console.error(
@@ -685,18 +538,17 @@ router.get(
             );
 
             res.status(500).json({
-
                 success: false,
-
-                message:
-                    "Failed to load analytics"
-
+                message: "Failed to load analytics"
             });
 
         }
 
     }
-);// ==========================================
+);
+
+
+// ==========================================
 // ADMIN - QUIZ STATISTICS
 // ==========================================
 
@@ -713,37 +565,50 @@ router.get(
                 SELECT
                     q.id AS quiz_id,
                     q.title AS quiz_title,
+
                     COUNT(a.id) AS total_attempts,
+
                     COALESCE(
-                        ROUND(AVG(a.percentage)::numeric, 2),
+                        ROUND(
+                            AVG(a.percentage)::numeric,
+                            2
+                        ),
                         0
                     ) AS average_score,
+
                     COALESCE(
                         MAX(a.percentage),
                         0
                     ) AS highest_score,
+
                     COALESCE(
                         MIN(a.percentage),
                         0
                     ) AS lowest_score,
+
                     COUNT(
                         CASE
-                            WHEN a.status = 'PASS'
+                            WHEN UPPER(a.status) = 'PASS'
                             THEN 1
                         END
                     ) AS passed,
+
                     COUNT(
                         CASE
-                            WHEN a.status = 'FAIL'
+                            WHEN UPPER(a.status) = 'FAIL'
                             THEN 1
                         END
                     ) AS failed
+
                 FROM quizzes q
+
                 LEFT JOIN quiz_attempts a
                     ON q.id = a.quiz_id
+
                 GROUP BY
                     q.id,
                     q.title
+
                 ORDER BY
                     q.id DESC
                 `
@@ -754,9 +619,7 @@ router.get(
                 quizzes: result.rows
             });
 
-        }
-
-        catch (error) {
+        } catch (error) {
 
             console.error(
                 "Quiz statistics error:",
@@ -772,5 +635,6 @@ router.get(
 
     }
 );
+
 
 module.exports = router;
